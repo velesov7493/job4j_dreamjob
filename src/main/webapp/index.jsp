@@ -1,4 +1,7 @@
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import="ru.job4j.dreamjob.model.Post"%>
+<%@ page import="ru.job4j.dreamjob.store.PostStore"%>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,36 +20,26 @@
     <title>Работа мечты!</title>
 </head>
 <body>
-<h2>Список людей</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <h2>Объявления</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Наименование</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (Post entry : PostStore.getInstance().findAll()) { %>
+                <tr>
+                    <td><%=entry.getId()%></td>
+                    <td><%=entry.getName()%></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
