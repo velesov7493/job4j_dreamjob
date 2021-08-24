@@ -42,8 +42,12 @@ public class CandidateStore {
         return candidates.values();
     }
 
-    public void save(Candidate value, boolean isNew) {
-        if (isNew) {
+    public Candidate getById(int id) {
+        return candidates.get(id);
+    }
+
+    public void save(Candidate value) {
+        if (value.getId() == 0) {
             value.setId(generator.incrementAndGet());
         }
         candidates.put(value.getId(), value);

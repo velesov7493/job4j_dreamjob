@@ -1,6 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="ru.job4j.dreamjob.model.Candidate" %>
 <%@ page import="ru.job4j.dreamjob.store.CandidateStore" %>
+<%
+    String id = request.getParameter("id");
+    Candidate c = new Candidate(0, "", "");
+    if (id != null) {
+        c = CandidateStore.getInstance().getById(Integer.parseInt(id));
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -8,8 +15,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -26,16 +31,20 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>">&lt&lt</a>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.jsp">&lt&lt</a>
+                <% if (id == null) { %>
                 <h2>Новый кандидат</h2>
+                <% } else { %>
+                <h2>Редактирование кандидата</h2>
+                <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
+                <form action="<%=request.getContextPath()%>/candidate/save?id=<%=c.getId()%>" method="post">
                     <div class="form-group">
                         <label>Ф.И.О.</label>
-                        <input name="nName" type="text" class="form-control">
+                        <input name="nName" type="text" class="form-control" value="<%=c.getName()%>">
                         <label>Претендует на позицию</label>
-                        <input name="nPosition" type="text" class="form-control">
+                        <input name="nPosition" type="text" class="form-control" value="<%=c.getPosition()%>">
                     </div>
                     <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
                 </form>

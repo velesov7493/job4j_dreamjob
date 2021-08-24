@@ -30,8 +30,12 @@ public class PostStore {
         return posts.values();
     }
 
-    public void save(Post value, boolean isNew) {
-        if (isNew) {
+    public Post getById(int id) {
+        return posts.get(id);
+    }
+
+    public void save(Post value) {
+        if (value.getId() == 0) {
             value.setId(generator.incrementAndGet());
         }
         posts.put(value.getId(), value);

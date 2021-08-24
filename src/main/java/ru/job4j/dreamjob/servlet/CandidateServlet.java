@@ -19,10 +19,10 @@ public class CandidateServlet extends HttpServlet {
         CandidateStore store = CandidateStore.getInstance();
         store.save(
             new Candidate(
-                0,
+                Integer.parseInt(req.getParameter("id")),
                 req.getParameter("nName"),
                 req.getParameter("nPosition")
-            ), true);
+            ));
         resp.sendRedirect(req.getContextPath() + "/candidates.jsp");
     }
 }
