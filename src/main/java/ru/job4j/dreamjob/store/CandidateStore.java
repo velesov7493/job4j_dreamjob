@@ -17,18 +17,18 @@ public class CandidateStore {
         candidates.put(1, new Candidate(
                 1,
                 "Иванов Иван Иванович",
-                "Младший java-разработчик")
-        );
+                "Младший java-разработчик"
+        ));
         candidates.put(2, new Candidate(
                 2,
                 "Петров Валерий Николаевич",
-                "Обычный java-программист")
-        );
+                "Обычный java-программист"
+        ));
         candidates.put(3, new Candidate(
                 3,
                 "Баширов Валерий Павлович",
-                "Старший java-программист")
-        );
+                "Старший java-программист"
+        ));
     }
 
     public static CandidateStore getInstance() {

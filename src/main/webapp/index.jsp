@@ -25,9 +25,13 @@
         <div class="card" style="width: 100%">
             <div class="card-header"><h2>Разделы</h2></div>
             <div class="card-body">
-                <ul>
-                    <li><a href="/dreamjob/posts.jsp">Вакансии</a></li>
-                    <li><a href="/dreamjob/candidates.jsp">Кандидаты</a></li>
+                <ul class="nav">
+                    <li class="nav-item" style="margin-left: 10px">
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 10px">
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                    </li>
                 </ul>
             </div>
         </div>
