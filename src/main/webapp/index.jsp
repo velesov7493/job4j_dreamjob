@@ -36,6 +36,24 @@
             </div>
         </div>
     </div>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <h4>Сегодняшние вакансии</h4>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <h4>Сегодняшние кандидаты</h4>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
