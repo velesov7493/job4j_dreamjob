@@ -30,7 +30,7 @@
                 <h2>Новая вакансия</h2>
             </div>
             <div class="card-body">
-                <form>
+                <form action="<%=request.getContextPath()%>/post/save" method="post">
                     <div class="form-group">
                         <label>Наименование позиции</label>
                         <input name="nPosition" type="text" class="form-control">
