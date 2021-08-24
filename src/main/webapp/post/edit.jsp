@@ -27,25 +27,16 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>">&lt&lt</a>
-                <h2>Вакансии</h2>
+                <h2>Новая вакансия</h2>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>№ п/п</th>
-                            <th>Наименование</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for (Post entry : PostStore.getInstance().findAll()) { %>
-                        <tr>
-                            <td><%=entry.getId()%></td>
-                            <td><%=entry.getName()%></td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                <form>
+                    <div class="form-group">
+                        <label>Наименование позиции</label>
+                        <input name="nPosition" type="text" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
+                </form>
             </div>
         </div>
     </div>

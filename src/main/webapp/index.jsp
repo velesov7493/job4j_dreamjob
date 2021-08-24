@@ -32,6 +32,12 @@
                     <li class="nav-item" style="margin-left: 10px">
                         <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
                     </li>
+                    <li class="nav-item" style="margin-left: 10px">
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 10px">
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                    </li>
                 </ul>
             </div>
         </div>
