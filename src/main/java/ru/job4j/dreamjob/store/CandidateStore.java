@@ -5,11 +5,13 @@ import ru.job4j.dreamjob.model.Candidate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CandidateStore {
 
     private static final CandidateStore INSTANCE = new CandidateStore();
 
+    private final AtomicInteger generator;
     private final Map<Integer, Candidate> candidates;
 
     private CandidateStore() {
@@ -29,6 +31,7 @@ public class CandidateStore {
                 "Баширов Валерий Павлович",
                 "Старший java-программист"
         ));
+        generator = new AtomicInteger(3);
     }
 
     public static CandidateStore getInstance() {
@@ -37,5 +40,12 @@ public class CandidateStore {
 
     public Collection<Candidate> findAll() {
         return candidates.values();
+    }
+
+    public void save(Candidate value, boolean isNew) {
+        if (isNew) {
+            value.setId(generator.incrementAndGet());
+        }
+        candidates.put(value.getId(), value);
     }
 }

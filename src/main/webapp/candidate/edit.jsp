@@ -30,7 +30,7 @@
                 <h2>Новый кандидат</h2>
             </div>
             <div class="card-body">
-                <form>
+                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
                     <div class="form-group">
                         <label>Ф.И.О.</label>
                         <input name="nName" type="text" class="form-control">

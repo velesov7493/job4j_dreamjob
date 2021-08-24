@@ -14,6 +14,7 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
+
         req.setCharacterEncoding("UTF-8");
         PostStore store = PostStore.getInstance();
         store.save(new Post(0, req.getParameter("nPosition")), true);
