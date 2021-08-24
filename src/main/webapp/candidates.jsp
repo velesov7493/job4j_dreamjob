@@ -1,12 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="ru.job4j.dreamjob.model.Post"%>
-<%@ page import="ru.job4j.dreamjob.store.PostStore"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="ru.job4j.dreamjob.model.Candidate" %>
+<%@ page import="ru.job4j.dreamjob.store.CandidateStore" %>
 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -17,18 +19,35 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <title>Работа мечты!</title>
+    <title>Работа мечты</title>
 </head>
 <body>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
-            <div class="card-header"><h2>Разделы</h2></div>
+            <div class="card-header">
+                <a class="btn btn-light" style="float: left" href="/dreamjob">&lt&lt</a>
+                <h2>Кандидаты</h2>
+            </div>
             <div class="card-body">
-                <ul>
-                    <li><a href="/dreamjob/posts.jsp">Вакансии</a></li>
-                    <li><a href="/dreamjob/candidates.jsp">Кандидаты</a></li>
-                </ul>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>№ п/п</th>
+                        <th>Ф.И.О.</th>
+                        <th>Претендует на позицию</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (Candidate entry : CandidateStore.getInstance().findAll()) { %>
+                    <tr>
+                        <td><%=entry.getId()%></td>
+                        <td><%=entry.getName()%></td>
+                        <td><%=entry.getPosition()%></td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
