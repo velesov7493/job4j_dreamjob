@@ -27,27 +27,18 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>">&lt&lt</a>
-                <h2>Кандидаты</h2>
+                <h2>Новый кандидат</h2>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>№ п/п</th>
-                        <th>Ф.И.О.</th>
-                        <th>Претендует на позицию</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% for (Candidate entry : CandidateStore.getInstance().findAll()) { %>
-                    <tr>
-                        <td><%=entry.getId()%></td>
-                        <td><%=entry.getName()%></td>
-                        <td><%=entry.getPosition()%></td>
-                    </tr>
-                    <% } %>
-                    </tbody>
-                </table>
+                <form>
+                    <div class="form-group">
+                        <label>Ф.И.О.</label>
+                        <input name="nName" type="text" class="form-control">
+                        <label>Претендует на позицию</label>
+                        <input name="nPosition" type="text" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
+                </form>
             </div>
         </div>
     </div>
