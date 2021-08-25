@@ -1,14 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="ru.job4j.dreamjob.model.Post" %>
-<%@ page import="ru.job4j.dreamjob.store.PostStore" %>
 <%
-    String id = request.getParameter("id");
-    Post p = new Post(0, "");
-    if (id != null) {
-        p = PostStore.getInstance().getById(Integer.parseInt(id));
-    }
+    Post p = (Post) request.getAttribute("post");
 %>
-
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -32,15 +26,15 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/posts.jsp">&lt&lt</a>
-                <% if (id == null) { %>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/posts.do">&lt&lt</a>
+                <% if (p.getId() == 0) { %>
                 <h2>Новая вакансия</h2>
                 <% } else { %>
                 <h2>Редактирование вакансии</h2>
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post/save?id=<%=p.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/posts.do?id=<%=p.getId()%>" method="post">
                     <div class="form-group">
                         <label>Наименование позиции</label>
                         <input name="nPosition" type="text" class="form-control" value="<%=p.getName()%>">

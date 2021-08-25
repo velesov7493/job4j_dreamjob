@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="ru.job4j.dreamjob.model.Post" %>
-<%@ page import="ru.job4j.dreamjob.store.PostStore" %>
+<%@ page import="java.util.Collection" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>">&lt&lt</a>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">&lt&lt</a>
                 <h2>Вакансии</h2>
             </div>
             <div class="card-body">
@@ -38,11 +38,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (Post entry : PostStore.getInstance().findAll()) { %>
+                        <% for (Post entry : (Collection<Post>) request.getAttribute("posts")) { %>
                         <tr>
                             <td><%=entry.getId()%></td>
                             <td><%=entry.getName()%></td>
-                            <td><a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=entry.getId()%>"><i class="fa fa-edit mr-3"></i></a></td>
+                            <td><a href="<%=request.getContextPath()%>/posts.do?id=<%=entry.getId()%>"><i class="fa fa-edit mr-3"></i></a></td>
                         </tr>
                         <% } %>
                     </tbody>

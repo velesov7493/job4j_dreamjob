@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="ru.job4j.dreamjob.model.Candidate" %>
-<%@ page import="ru.job4j.dreamjob.store.CandidateStore" %>
+<%@ page import="java.util.Collection" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>">&lt&lt</a>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">&lt&lt</a>
                 <h2>Кандидаты</h2>
             </div>
             <div class="card-body">
@@ -39,12 +39,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Candidate entry : CandidateStore.getInstance().findAll()) { %>
+                    <% for (Candidate entry : (Collection<Candidate>) request.getAttribute("candidates")) { %>
                     <tr>
                         <td><%=entry.getId()%></td>
                         <td><%=entry.getName()%></td>
                         <td><%=entry.getPosition()%></td>
-                        <td><a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=<%=entry.getId()%>"><i class="fa fa-edit mr-3"></i></a></td>
+                        <td><a href="<%=request.getContextPath()%>/candidates.do?id=<%=entry.getId()%>"><i class="fa fa-edit mr-3"></i></a></td>
                     </tr>
                     <% } %>
                     </tbody>

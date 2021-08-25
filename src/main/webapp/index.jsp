@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="ru.job4j.dreamjob.model.Post"%>
-<%@ page import="ru.job4j.dreamjob.store.PostStore"%>
-
+<%
+    if (request.getAttribute("isServlet") == null) {
+        response.sendRedirect(request.getContextPath() + "/index.do");
+    }
+%>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,16 +29,16 @@
             <div class="card-body">
                 <ul class="nav">
                     <li class="nav-item" style="margin-left: 10px">
-                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
                     </li>
                     <li class="nav-item" style="margin-left: 10px">
-                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
                     </li>
                     <li class="nav-item" style="margin-left: 10px">
-                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/posts.do?id=0">Добавить вакансию</a>
                     </li>
                     <li class="nav-item" style="margin-left: 10px">
-                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                        <a class="nav-link btn btn-outline-primary" href="<%=request.getContextPath()%>/candidates.do?id=0">Добавить кандидата</a>
                     </li>
                 </ul>
             </div>

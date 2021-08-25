@@ -10,7 +10,6 @@
   <packaging>war</packaging>
 
   <name>dreamjob</name>
-  <url>http://localhost</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

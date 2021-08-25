@@ -11,6 +11,30 @@ import java.io.IOException;
 
 public class PostServlet extends HttpServlet {
 
+    private void editPost(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+
+        String sid = req.getParameter("id");
+        int id = Integer.parseInt(sid);
+        Post p = new Post(0, "");
+        if (id != 0) {
+            p = PostStore.getInstance().getById(id);
+        }
+        req.setAttribute("post", p);
+        req.getRequestDispatcher("post/edit.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+        if (req.getParameter("id") != null) {
+            editPost(req, resp);
+            return;
+        }
+        req.setAttribute("posts", PostStore.getInstance().findAll());
+        req.getRequestDispatcher("posts.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
@@ -23,6 +47,6 @@ public class PostServlet extends HttpServlet {
                         req.getParameter("nPosition")
                 )
         );
-        resp.sendRedirect(req.getContextPath() + "/posts.jsp");
+        resp.sendRedirect(req.getContextPath() + "/posts.do");
     }
 }

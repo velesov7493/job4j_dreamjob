@@ -2,11 +2,7 @@
 <%@ page import="ru.job4j.dreamjob.model.Candidate" %>
 <%@ page import="ru.job4j.dreamjob.store.CandidateStore" %>
 <%
-    String id = request.getParameter("id");
-    Candidate c = new Candidate(0, "", "");
-    if (id != null) {
-        c = CandidateStore.getInstance().getById(Integer.parseInt(id));
-    }
+    Candidate c = (Candidate) request.getAttribute("candidate");
 %>
 
 <!DOCTYPE html>
@@ -31,15 +27,15 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.jsp">&lt&lt</a>
-                <% if (id == null) { %>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.do">&lt&lt</a>
+                <% if (c.getId() == 0) { %>
                 <h2>Новый кандидат</h2>
                 <% } else { %>
                 <h2>Редактирование кандидата</h2>
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save?id=<%=c.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=c.getId()%>" method="post">
                     <div class="form-group">
                         <label>Ф.И.О.</label>
                         <input name="nName" type="text" class="form-control" value="<%=c.getName()%>">

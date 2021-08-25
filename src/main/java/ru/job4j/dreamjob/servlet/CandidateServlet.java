@@ -11,6 +11,31 @@ import java.io.IOException;
 
 public class CandidateServlet extends HttpServlet {
 
+    private void editCandidate(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+
+        String sid = req.getParameter("id");
+        int id = Integer.parseInt(sid);
+        Candidate c = new Candidate(0, "", "");
+        if (id != 0) {
+            c = CandidateStore.getInstance().getById(id);
+        }
+        req.setAttribute("candidate", c);
+        req.getRequestDispatcher("candidate/edit.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+
+        if (req.getParameter("id") != null) {
+            editCandidate(req, resp);
+            return;
+        }
+        req.setAttribute("candidates", CandidateStore.getInstance().findAll());
+        req.getRequestDispatcher("candidates.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
@@ -23,6 +48,6 @@ public class CandidateServlet extends HttpServlet {
                 req.getParameter("nName"),
                 req.getParameter("nPosition")
             ));
-        resp.sendRedirect(req.getContextPath() + "/candidates.jsp");
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
