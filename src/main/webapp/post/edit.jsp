@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="ru.job4j.dreamjob.model.Post" %>
-<%
-    Post p = (Post) request.getAttribute("post");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,17 +24,18 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/posts.do">&lt&lt</a>
-                <% if (p.getId() == 0) { %>
+                <c:if test="${post.id == 0}">
                 <h2>Новая вакансия</h2>
-                <% } else { %>
+                </c:if>
+                <c:if test="${post.id != 0}">
                 <h2>Редактирование вакансии</h2>
-                <% } %>
+                </c:if>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/posts.do?id=<%=p.getId()%>" method="post">
+                <form action="<c:url value="/posts.do?id=${post.id}"/>" method="post">
                     <div class="form-group">
                         <label>Наименование позиции</label>
-                        <input name="nPosition" type="text" class="form-control" value="<%=p.getName()%>">
+                        <input name="nPosition" type="text" class="form-control" value="<c:out value="${post.name}"/>">
                     </div>
                     <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
                 </form>

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="ru.job4j.dreamjob.model.Candidate" %>
-<%@ page import="java.util.Collection" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -39,14 +38,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Candidate entry : (Collection<Candidate>) request.getAttribute("candidates")) { %>
+                    <c:forEach items="${candidates}" var="candidate">
                     <tr>
-                        <td><%=entry.getId()%></td>
-                        <td><%=entry.getName()%></td>
-                        <td><%=entry.getPosition()%></td>
-                        <td><a href="<%=request.getContextPath()%>/candidates.do?id=<%=entry.getId()%>"><i class="fa fa-edit mr-3"></i></a></td>
+                        <td><c:out value="${candidate.id}"/></td>
+                        <td><c:out value="${candidate.name}"/></td>
+                        <td><c:out value="${candidate.position}"/></td>
+                        <td><a href="<c:url value="/candidates.do?id=${candidate.id}"/>"><i class="fa fa-edit mr-3"></i></a></td>
                     </tr>
-                    <% } %>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

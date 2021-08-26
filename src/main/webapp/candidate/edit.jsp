@@ -1,9 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="ru.job4j.dreamjob.model.Candidate" %>
-<%@ page import="ru.job4j.dreamjob.store.CandidateStore" %>
-<%
-    Candidate c = (Candidate) request.getAttribute("candidate");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,19 +24,20 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.do">&lt&lt</a>
-                <% if (c.getId() == 0) { %>
+                <c:if test="${candidate.id == 0}">
                 <h2>Новый кандидат</h2>
-                <% } else { %>
+                </c:if>
+                <c:if test="${candidate.id != 0}">
                 <h2>Редактирование кандидата</h2>
-                <% } %>
+                </c:if>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=c.getId()%>" method="post">
+                <form action="<c:url value="/candidates.do?id=${candidate.id}"/>" method="post">
                     <div class="form-group">
                         <label>Ф.И.О.</label>
-                        <input name="nName" type="text" class="form-control" value="<%=c.getName()%>">
+                        <input name="nName" type="text" class="form-control" value="<c:out value="${candidate.name}"/>"/>
                         <label>Претендует на позицию</label>
-                        <input name="nPosition" type="text" class="form-control" value="<%=c.getPosition()%>">
+                        <input name="nPosition" type="text" class="form-control" value="<c:out value="${candidate.position}"/>"/>
                     </div>
                     <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
                 </form>
