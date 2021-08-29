@@ -23,7 +23,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.do">&lt&lt</a>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/candidates.do">&lt;&lt;</a>
                 <c:if test="${candidate.id == 0}">
                 <h2>Новый кандидат</h2>
                 </c:if>
@@ -32,14 +32,24 @@
                 </c:if>
             </div>
             <div class="card-body">
-                <form action="<c:url value="/candidates.do?id=${candidate.id}"/>" method="post">
+                <form action="<c:url value="/candidates.do"/>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 2em">
+                            <img class="col-lg-9 col-md-12 col-sm-12" src="<c:url value="/image?id=${candidate.id}"/>" alt="Фото кандидата"/>
+                            <ul class="nav" style="margin-top: 1em">
+                                <li class="nav-item" style="margin-right: 10px"><a class="btn btn-outline-primary" href="<c:url value="/image?id=${candidate.id}&delete=1"/>">Удалить фото</a></li>
+                                <li class="nav-item" style="margin-right: 10px"><a class="btn btn-outline-primary" href="<c:url value="/image?id=${candidate.id}&download=1"/>">Скачать фото</a></li>
+                            </ul>
+                        </div>
                         <label>Ф.И.О.</label>
                         <input name="nName" type="text" class="form-control" value="<c:out value="${candidate.name}"/>"/>
                         <label>Претендует на позицию</label>
                         <input name="nPosition" type="text" class="form-control" value="<c:out value="${candidate.position}"/>"/>
+                        <label>Фото</label>
+                        <input name="nPhoto" type="file"/>
+                        <input name="nCandidateId" type="hidden" value="<c:out value="${candidate.id}"/>"/>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="float: right">Сохранить</button>
+                    <input type="submit" class="btn btn-primary" style="float: right" value="Сохранить"/>
                 </form>
             </div>
         </div>

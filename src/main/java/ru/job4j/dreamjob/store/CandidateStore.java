@@ -52,4 +52,11 @@ public class CandidateStore {
         }
         candidates.put(value.getId(), value);
     }
+
+    public void delete(int id) {
+        if (candidates.remove(id) != null) {
+            ImageStore imgStore = ImageStore.getInstance();
+            imgStore.delete(id);
+        }
+    }
 }

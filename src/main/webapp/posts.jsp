@@ -24,7 +24,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">&lt&lt</a>
+                <a class="btn btn-light" style="float: left" href="<%=request.getContextPath()%>/index.do">&lt;&lt;</a>
                 <h2>Вакансии</h2>
             </div>
             <div class="card-body">
