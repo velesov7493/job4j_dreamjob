@@ -3,6 +3,8 @@ package ru.job4j.dreamjob.servlet;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.store.CandidateStore;
 import ru.job4j.dreamjob.store.ImageStore;
+import ru.job4j.dreamjob.store.MemCandidateStore;
+import ru.job4j.dreamjob.store.FilesImageStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -22,10 +24,10 @@ public class CandidateServlet extends HttpServlet {
         int id = Integer.parseInt(sid);
         Candidate c = new Candidate(0, "", "");
         if (id != 0) {
-            c = CandidateStore.getInstance().getById(id);
+            c = MemCandidateStore.getInstance().getById(id);
         }
         req.setAttribute("candidate", c);
-        req.getRequestDispatcher("candidate/edit.jsp").forward(req, resp);
+        req.getRequestDispatcher("views/candidate/edit.jsp").forward(req, resp);
     }
 
     @Override
@@ -36,16 +38,16 @@ public class CandidateServlet extends HttpServlet {
             editCandidate(req, resp);
             return;
         }
-        req.setAttribute("candidates", CandidateStore.getInstance().findAll());
-        req.getRequestDispatcher("candidates.jsp").forward(req, resp);
+        req.setAttribute("candidates", MemCandidateStore.getInstance().findAll());
+        req.getRequestDispatcher("views/candidate/list.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
-        CandidateStore store = CandidateStore.getInstance();
-        ImageStore imgStore = ImageStore.getInstance();
+        CandidateStore store = MemCandidateStore.getInstance();
+        ImageStore imgStore = FilesImageStore.getInstance();
         String sid = new String(
                 req.getPart("nCandidateId").getInputStream().readAllBytes(),
                 StandardCharsets.UTF_8

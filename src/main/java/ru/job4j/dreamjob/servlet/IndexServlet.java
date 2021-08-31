@@ -13,6 +13,6 @@ public class IndexServlet extends HttpServlet {
         throws ServletException, IOException {
 
         req.setAttribute("isServlet", true);
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("views/index.jsp").forward(req, resp);
     }
 }

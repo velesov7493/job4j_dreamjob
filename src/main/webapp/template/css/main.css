@@ -1,0 +1,93 @@
+ul li {
+    list-style: none;
+}
+
+a:hover {
+    outline: none;
+    text-decoration:none;
+}
+
+a:focus {
+    outline:none;
+    outline-offset: 0;
+}
+
+a {
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+}
+
+.btn:hover,
+.btn:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+/* Menu */
+
+ul.menu {
+    list-style: none;
+    height: 36px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.menu li.item-right {
+    float: right;
+    margin-right: 10px;
+}
+
+.menu li.item-left {
+    float: left;
+    margin-left: 10px;
+}
+
+/* Cards */
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-top: 1em;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-header h2 {
+    text-align: center;
+}
+
+.table td {
+    font-size: 16px;
+}

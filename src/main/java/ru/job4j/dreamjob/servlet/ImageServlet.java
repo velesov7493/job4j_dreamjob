@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.servlet;
 
 import ru.job4j.dreamjob.model.Image;
+import ru.job4j.dreamjob.store.FilesImageStore;
 import ru.job4j.dreamjob.store.ImageStore;
 
 import javax.servlet.ServletException;
@@ -23,7 +24,7 @@ public class ImageServlet extends HttpServlet {
         String download = req.getParameter("download");
         String delete = req.getParameter("delete");
         int id = Integer.parseInt(sid);
-        ImageStore store = ImageStore.getInstance();
+        ImageStore store = FilesImageStore.getInstance();
         if (delete != null && id != 0) {
             store.delete(id);
             resp.sendRedirect(req.getContextPath() + "/candidates.do?id=" + sid);
