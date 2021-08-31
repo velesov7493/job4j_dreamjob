@@ -70,12 +70,13 @@ public class Post {
 
     @Override
     public String toString() {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         return
                 "Post{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", description='" + description + '\''
-                + ", created=" + created
+                + ", created=" + df.format(created)
                 + '}';
     }
 }
