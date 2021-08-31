@@ -1,10 +1,7 @@
 package ru.job4j.dreamjob.servlet;
 
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.store.CandidateStore;
-import ru.job4j.dreamjob.store.ImageStore;
-import ru.job4j.dreamjob.store.MemCandidateStore;
-import ru.job4j.dreamjob.store.FilesImageStore;
+import ru.job4j.dreamjob.store.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 @MultipartConfig(location = "/var/tmp/tomcat", maxFileSize = 16777216L, maxRequestSize = 33554432L)
 public class CandidateServlet extends HttpServlet {
 
+    private final CandidateStore store = new PsqlCandidateStore();
+
     private void editCandidate(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
@@ -24,7 +23,7 @@ public class CandidateServlet extends HttpServlet {
         int id = Integer.parseInt(sid);
         Candidate c = new Candidate(0, "", "");
         if (id != 0) {
-            c = MemCandidateStore.getInstance().getById(id);
+            c = store.getById(id);
         }
         req.setAttribute("candidate", c);
         req.getRequestDispatcher("views/candidate/edit.jsp").forward(req, resp);
@@ -38,7 +37,7 @@ public class CandidateServlet extends HttpServlet {
             editCandidate(req, resp);
             return;
         }
-        req.setAttribute("candidates", MemCandidateStore.getInstance().findAll());
+        req.setAttribute("candidates", store.findAll());
         req.getRequestDispatcher("views/candidate/list.jsp").forward(req, resp);
     }
 
@@ -46,7 +45,6 @@ public class CandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
-        CandidateStore store = MemCandidateStore.getInstance();
         ImageStore imgStore = FilesImageStore.getInstance();
         String sid = new String(
                 req.getPart("nCandidateId").getInputStream().readAllBytes(),

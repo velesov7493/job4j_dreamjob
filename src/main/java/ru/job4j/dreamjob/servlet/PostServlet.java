@@ -1,8 +1,8 @@
 package ru.job4j.dreamjob.servlet;
 
 import ru.job4j.dreamjob.model.Post;
-import ru.job4j.dreamjob.store.MemPostStore;
 import ru.job4j.dreamjob.store.PostStore;
+import ru.job4j.dreamjob.store.PsqlPostStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class PostServlet extends HttpServlet {
 
+    private final PostStore store = new PsqlPostStore();
+
     private void editPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
@@ -19,7 +21,7 @@ public class PostServlet extends HttpServlet {
         int id = Integer.parseInt(sid);
         Post p = new Post(0, "");
         if (id != 0) {
-            p = MemPostStore.getInstance().getById(id);
+            p = store.getById(id);
         }
         req.setAttribute("post", p);
         req.getRequestDispatcher("views/post/edit.jsp").forward(req, resp);
@@ -32,7 +34,7 @@ public class PostServlet extends HttpServlet {
             editPost(req, resp);
             return;
         }
-        req.setAttribute("posts", MemPostStore.getInstance().findAll());
+        req.setAttribute("posts", store.findAll());
         req.getRequestDispatcher("views/post/list.jsp").forward(req, resp);
     }
 
@@ -41,7 +43,6 @@ public class PostServlet extends HttpServlet {
         throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-        PostStore store = MemPostStore.getInstance();
         store.save(
                 new Post(
                         Integer.parseInt(req.getParameter("id")),
