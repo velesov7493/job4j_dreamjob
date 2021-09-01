@@ -1,5 +1,7 @@
 package ru.job4j.dreamjob.store;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.dreamjob.model.Image;
 
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.Objects;
 
 public class FilesImageStore implements ImageStore {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FilesImageStore.class.getName());
     private static final String IMAGES_DIR = "/media/data/sources/job4j/web-images";
     private static final FilesImageStore INSTANCE = new FilesImageStore();
 
@@ -22,8 +25,8 @@ public class FilesImageStore implements ImageStore {
             result = folder.mkdir();
         }
         if (!result) {
-            System.out.println("Ошибка инициализации хранилища картинок!");
-            System.out.println("Выключаюсь...");
+            LOG.error("Критическая ошибка инициализации хранилища картинок!");
+            LOG.info("Выключаюсь...");
             System.exit(2);
         }
     }
@@ -56,6 +59,11 @@ public class FilesImageStore implements ImageStore {
         try (FileInputStream in = new FileInputStream(new File(fileNameById(id)))) {
             result.setContent(in.readAllBytes());
         } catch (Throwable ex) {
+            if (id == 0) {
+                throw new IllegalStateException(
+                    "Изображение отсутствующей фотографии (img000000000.res) не найдено!"
+                );
+            }
             result = load(0);
         }
         return result;
@@ -66,7 +74,7 @@ public class FilesImageStore implements ImageStore {
         try (FileOutputStream out = new FileOutputStream(new File(fileNameById(id)))) {
             out.write(stream.readAllBytes());
         } catch (Throwable ex) {
-            ex.printStackTrace();
+            LOG.error("Ошибка при записи загруженного изображения: ", ex);
         }
     }
 

@@ -1,6 +1,8 @@
 package ru.job4j.dreamjob;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,10 +11,11 @@ import java.util.Properties;
 
 public class AppSettings {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AppSettings.class.getName());
     private static SoftReference<Properties> settings;
     private static BasicDataSource pool;
 
-    public static synchronized Properties loadProperties() {
+    private static Properties loadProperties() {
         Properties s = settings == null ? null : settings.get();
         if (s == null) {
             s = new Properties();
@@ -23,8 +26,12 @@ public class AppSettings {
             ) {
                 s.load(in);
                 settings = new SoftReference<>(s);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (Throwable ex) {
+                LOG.error(
+                    "Критическая ошибка - невозможно прочитать свойства подключения к БД: ", ex
+                );
+                LOG.info("Выключаюсь...");
+                System.exit(2);
             }
         }
         return s;

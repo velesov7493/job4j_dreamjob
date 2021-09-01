@@ -1,6 +1,8 @@
 package ru.job4j.dreamjob.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.dreamjob.AppSettings;
 import ru.job4j.dreamjob.model.Candidate;
 
@@ -11,10 +13,17 @@ import java.util.List;
 
 public class PsqlCandidateStore implements CandidateStore {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PsqlCandidateStore.class.getName());
+    private static final PsqlCandidateStore INSTANCE = new PsqlCandidateStore();
+
     private final BasicDataSource pool;
 
-    public PsqlCandidateStore() {
+    private PsqlCandidateStore() {
         pool = AppSettings.getConnectionPool();
+    }
+
+    public static PsqlCandidateStore getInstance() {
+        return INSTANCE;
     }
 
     @Override
@@ -33,8 +42,8 @@ public class PsqlCandidateStore implements CandidateStore {
                     ));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
         }
         return result;
     }
@@ -56,8 +65,8 @@ public class PsqlCandidateStore implements CandidateStore {
                     );
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
         }
         return result;
     }
@@ -78,7 +87,7 @@ public class PsqlCandidateStore implements CandidateStore {
             keys.close();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }
@@ -95,7 +104,7 @@ public class PsqlCandidateStore implements CandidateStore {
             st.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }
@@ -120,7 +129,7 @@ public class PsqlCandidateStore implements CandidateStore {
             st.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }

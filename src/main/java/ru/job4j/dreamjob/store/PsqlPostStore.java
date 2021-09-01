@@ -1,6 +1,8 @@
 package ru.job4j.dreamjob.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.dreamjob.AppSettings;
 import ru.job4j.dreamjob.model.Post;
 
@@ -11,10 +13,17 @@ import java.util.List;
 
 public class PsqlPostStore implements PostStore {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PsqlPostStore.class.getName());
+    private static final PsqlPostStore INSTANCE = new PsqlPostStore();
+
     private final BasicDataSource pool;
 
-    public PsqlPostStore() {
+    private PsqlPostStore() {
         pool = AppSettings.getConnectionPool();
+    }
+
+    public static PsqlPostStore getInstance() {
+        return INSTANCE;
     }
 
     @Override
@@ -32,8 +41,8 @@ public class PsqlPostStore implements PostStore {
                     ));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
         }
         return result;
     }
@@ -55,8 +64,8 @@ public class PsqlPostStore implements PostStore {
                     result.setCreated(it.getDate("pCreated"));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
         }
         return result;
     }
@@ -79,7 +88,7 @@ public class PsqlPostStore implements PostStore {
             keys.close();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }
@@ -96,7 +105,7 @@ public class PsqlPostStore implements PostStore {
             st.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }
@@ -121,7 +130,7 @@ public class PsqlPostStore implements PostStore {
             st.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
-                ex.printStackTrace();
+                LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
     }

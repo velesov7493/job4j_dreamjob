@@ -14,11 +14,10 @@ import java.nio.charset.StandardCharsets;
 @MultipartConfig(location = "/var/tmp/tomcat", maxFileSize = 16777216L, maxRequestSize = 33554432L)
 public class CandidateServlet extends HttpServlet {
 
-    private final CandidateStore store = new PsqlCandidateStore();
-
     private void editCandidate(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
+        CandidateStore store = PsqlCandidateStore.getInstance();
         String sid = req.getParameter("id");
         int id = Integer.parseInt(sid);
         Candidate c = new Candidate(0, "", "");
@@ -37,6 +36,7 @@ public class CandidateServlet extends HttpServlet {
             editCandidate(req, resp);
             return;
         }
+        CandidateStore store = PsqlCandidateStore.getInstance();
         req.setAttribute("candidates", store.findAll());
         req.getRequestDispatcher("views/candidate/list.jsp").forward(req, resp);
     }
@@ -45,6 +45,7 @@ public class CandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
+        CandidateStore store = PsqlCandidateStore.getInstance();
         ImageStore imgStore = FilesImageStore.getInstance();
         String sid = new String(
                 req.getPart("nCandidateId").getInputStream().readAllBytes(),

@@ -10,7 +10,7 @@ import ru.job4j.dreamjob.store.PsqlPostStore;
 public class PsqlMain {
 
     public static void main(String[] args) {
-        PostStore postStore = new PsqlPostStore();
+        PostStore postStore = PsqlPostStore.getInstance();
         Post p = new Post(0, "Вакансия");
         postStore.save(p);
         System.out.println("Добавленные вакансии:");
@@ -27,7 +27,7 @@ public class PsqlMain {
             System.out.println(post.getId() + " " + post.getName());
         }
         Candidate c = new Candidate(0, "Candidate", "Position");
-        CandidateStore candidateStore = new PsqlCandidateStore();
+        CandidateStore candidateStore = PsqlCandidateStore.getInstance();
         candidateStore.save(c);
         System.out.println("Добавленные кандидаты:");
         for (Candidate candidate : candidateStore.findAll()) {

@@ -12,11 +12,10 @@ import java.io.IOException;
 
 public class PostServlet extends HttpServlet {
 
-    private final PostStore store = new PsqlPostStore();
-
     private void editPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
+        PostStore store = PsqlPostStore.getInstance();
         String sid = req.getParameter("id");
         int id = Integer.parseInt(sid);
         Post p = new Post(0, "");
@@ -34,6 +33,7 @@ public class PostServlet extends HttpServlet {
             editPost(req, resp);
             return;
         }
+        PostStore store = PsqlPostStore.getInstance();
         req.setAttribute("posts", store.findAll());
         req.getRequestDispatcher("views/post/list.jsp").forward(req, resp);
     }
@@ -43,6 +43,7 @@ public class PostServlet extends HttpServlet {
         throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
+        PostStore store = PsqlPostStore.getInstance();
         store.save(
                 new Post(
                         Integer.parseInt(req.getParameter("id")),
