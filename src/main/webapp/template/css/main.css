@@ -1,7 +1,3 @@
-ul li {
-    list-style: none;
-}
-
 a:hover {
     outline: none;
     text-decoration:none;
@@ -38,6 +34,21 @@ h1, h2, h3 {
     float: right;
 }
 
+/*=-=-=-=-=-=-=-=-=-=-=-=-=-+
+|       Header CSS          |
++-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+
+.header-top {
+    background: none repeat scroll 0 0 #F0F0E9;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.header-bottom {
+    border: 2px solid #F0F0E9;
+    padding-top: 10px;
+}
+
 /* Menu */
 
 ul.menu {
@@ -67,14 +78,14 @@ ul.menu {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid #F0F0E9;
     border-radius: .25rem;
     margin-top: 1em;
 }
 
 .card-header {
     padding: .75rem 1.25rem;
-    background-color: rgba(0,0,0,.03);
+    background-color: #F0F0E9;
     border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
