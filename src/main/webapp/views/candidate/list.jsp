@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:set var="pageTitle" value="Список кандидатов" />
-<%@include file="../../template/layouts/pageHeader.jsp" %>
+<%@ include file="../../template/layouts/pageHeader.jsp" %>
 
-<body>
 <div class="container">
     <div class="row">
         <div class="card">
@@ -36,5 +35,5 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<%@ include file="../../template/layouts/pageFooter.jsp" %>

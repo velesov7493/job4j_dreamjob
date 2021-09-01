@@ -89,5 +89,19 @@ ul.menu {
 }
 
 .table td {
-    font-size: 16px;
+    font-size: 18px;
+}
+
+img.stretch {
+    min-height: 200px;
+    width: 75%;
+    margin: 10px auto;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.error-panel {
+    color: red;
+    font-weight: bold;
+    margin: 30px 0;
 }

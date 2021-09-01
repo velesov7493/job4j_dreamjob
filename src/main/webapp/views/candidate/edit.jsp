@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:set var="pageTitle" value="Редактирование кандидата" />
-<%@include file="../../template/layouts/pageHeader.jsp" %>
+<%@ include file="../../template/layouts/pageHeader.jsp" %>
 
-<body>
 <div class="container">
     <div class="row">
         <div class="card">
@@ -16,7 +15,7 @@
                 <h2>Редактирование кандидата</h2>
                 </c:if>
             </div>
-            <img class="col-lg-9 col-md-12 col-sm-12" src="<c:url value="/image?id=${candidate.id}"/>" alt="Фото кандидата"/>
+            <img class="col-lg-9 col-md-12 col-sm-12 stretch" src="<c:url value="/image?id=${candidate.id}"/>" alt="Фото кандидата"/>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <ul class="menu">
                     <li class="item-left"><a class="btn btn-default" href="<c:url value="/image?id=${candidate.id}&delete=1"/>">Удалить фото</a></li>
@@ -40,5 +39,5 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<%@ include file="../../template/layouts/pageFooter.jsp" %>

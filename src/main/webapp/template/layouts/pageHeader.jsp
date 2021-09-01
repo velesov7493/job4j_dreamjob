@@ -11,3 +11,4 @@
     <script src="<%=request.getContextPath()%>/template/js/bootstrap.min.js"></script>
     <link href="<%=request.getContextPath()%>/template/css/main.css" rel="stylesheet">
 </head>
+<body>
