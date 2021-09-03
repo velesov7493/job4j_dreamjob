@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-@MultipartConfig(location = "/var/tmp/tomcat", maxFileSize = 16777216L, maxRequestSize = 33554432L)
+@MultipartConfig(maxFileSize = 16777216L, maxRequestSize = 33554432L)
 public class CandidateServlet extends HttpServlet {
 
     private void editCandidate(HttpServletRequest req, HttpServletResponse resp)

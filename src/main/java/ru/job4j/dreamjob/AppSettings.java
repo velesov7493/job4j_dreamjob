@@ -4,7 +4,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.Properties;
@@ -15,14 +14,14 @@ public class AppSettings {
     private static SoftReference<Properties> settings;
     private static BasicDataSource pool;
 
-    private static Properties loadProperties() {
+    public static Properties loadProperties() {
         Properties s = settings == null ? null : settings.get();
         if (s == null) {
             s = new Properties();
             try (InputStream in =
                          AppSettings.class
                          .getClassLoader()
-                         .getResourceAsStream("db.properties")
+                         .getResourceAsStream("app.properties")
             ) {
                 s.load(in);
                 settings = new SoftReference<>(s);

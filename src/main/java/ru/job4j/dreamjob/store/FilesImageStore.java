@@ -2,6 +2,7 @@ package ru.job4j.dreamjob.store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.dreamjob.AppSettings;
 import ru.job4j.dreamjob.model.Image;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class FilesImageStore implements ImageStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(FilesImageStore.class.getName());
-    private static final String IMAGES_DIR = "/media/data/sources/job4j/web-images";
+    private static final String IMAGES_DIR = AppSettings.loadProperties().getProperty("dir.images");
     private static final FilesImageStore INSTANCE = new FilesImageStore();
 
     private FilesImageStore() {
