@@ -23,4 +23,4 @@ CREATE TABLE tz_users (
     uName VARCHAR(120) NOT NULL,
     uMail VARCHAR(90) NOT NULL UNIQUE,
     uPassword VARCHAR(40) NOT NULL
-)
+);

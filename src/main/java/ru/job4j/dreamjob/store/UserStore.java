@@ -12,7 +12,7 @@ public interface UserStore {
 
     User login(String email, String password);
 
-    void save(User value);
+    boolean save(User value);
 
-    void delete(int id);
+    boolean delete(int id);
 }

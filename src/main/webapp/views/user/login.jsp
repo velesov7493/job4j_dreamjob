@@ -16,6 +16,7 @@
                     <label>Пароль:</label>
                     <input type="password" class="form-control" name="password">
                 </div>
+                <a class="btn btn-default pull-left" href="<c:url value="/register.do"/>"><i class="fa fa-check-circle-o"></i> Регистрация</a>
                 <button type="submit" class="btn btn-primary pull-right">Войти</button>
                 <c:if test="${not empty error}">
                     <div class="error-panel"><c:out value="${error}"/></div>

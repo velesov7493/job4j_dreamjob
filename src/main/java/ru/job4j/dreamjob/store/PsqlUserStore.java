@@ -100,7 +100,8 @@ public class PsqlUserStore implements UserStore {
         return result;
     }
 
-    private void create(User value) {
+    private boolean create(User value) {
+        boolean result = false;
         String query = "INSERT INTO tz_users (uName, uMail, uPassword) VALUES (?, ?, ?);";
         try (
                 Connection cn = pool.getConnection();
@@ -113,16 +114,17 @@ public class PsqlUserStore implements UserStore {
             ResultSet keys = st.getGeneratedKeys();
             if (keys.next()) {
                 value.setId(keys.getInt(1));
+                result = true;
             }
             keys.close();
         } catch (SQLException ex) {
-            if (ex.getErrorCode() != 0) {
-                LOG.error("Ошибка при выполнении запроса: ", ex);
-            }
+            LOG.error("Ошибка при выполнении запроса: ", ex);
         }
+        return result;
     }
 
-    private void update(User value) {
+    private boolean update(User value) {
+        boolean result = false;
         String query = "UPDATE tz_users SET uName=?, uMail=?, uPassword=? WHERE id=?";
         try (
                 Connection cn = pool.getConnection();
@@ -132,36 +134,41 @@ public class PsqlUserStore implements UserStore {
             st.setString(2, value.getEmail());
             st.setString(3, Security.getSHA1(value.getPassword()));
             st.setInt(4, value.getId());
-            st.executeUpdate();
+            result = st.executeUpdate() > 0;
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
                 LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
+        return result;
     }
 
     @Override
-    public void save(User value) {
+    public boolean save(User value) {
+        boolean result;
         if (value.getId() <= 0) {
-            create(value);
+            result = create(value);
         } else {
-            update(value);
+            result = update(value);
         }
+        return result;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
+        boolean result = false;
         String query = "DELETE FROM tz_users WHERE id=?";
         try (
                 Connection cn = pool.getConnection();
                 PreparedStatement st = cn.prepareStatement(query)
         ) {
             st.setInt(1, id);
-            st.executeUpdate();
+            result = st.executeUpdate() > 0;
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {
                 LOG.error("Ошибка при выполнении запроса: ", ex);
             }
         }
+        return result;
     }
 }
