@@ -16,22 +16,7 @@ public class MemCandidateStore implements CandidateStore {
 
     private MemCandidateStore() {
         candidates = new ConcurrentHashMap<>();
-        candidates.put(1, new Candidate(
-                1,
-                "Иванов Иван Иванович",
-                "Младший java-разработчик"
-        ));
-        candidates.put(2, new Candidate(
-                2,
-                "Петров Валерий Николаевич",
-                "Обычный java-программист"
-        ));
-        candidates.put(3, new Candidate(
-                3,
-                "Баширов Валерий Павлович",
-                "Старший java-программист"
-        ));
-        generator = new AtomicInteger(3);
+        generator = new AtomicInteger(0);
     }
 
     public static MemCandidateStore getInstance() {

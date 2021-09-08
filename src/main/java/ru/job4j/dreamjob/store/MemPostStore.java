@@ -16,13 +16,10 @@ public class MemPostStore implements PostStore {
 
     private MemPostStore() {
         posts = new ConcurrentHashMap<>();
-        posts.put(1, new Post(1, "Младший java-разработчик (junior)"));
-        posts.put(2, new Post(2, "Обычный java-программист (middle)"));
-        posts.put(3, new Post(3, "Старший java-программист (senior)"));
-        generator = new AtomicInteger(3);
+        generator = new AtomicInteger(0);
     }
 
-    public static MemPostStore getInstance() {
+    public static PostStore getInstance() {
         return INSTANCE;
     }
 

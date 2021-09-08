@@ -26,9 +26,17 @@ public class FilesImageStore implements ImageStore {
             result = folder.mkdir();
         }
         if (!result) {
-            LOG.error("Критическая ошибка инициализации хранилища картинок!");
-            LOG.info("Выключаюсь...");
-            System.exit(2);
+            String defaultDir = AppSettings.loadProperties().getProperty("dir.images.default");
+            folder = new File(defaultDir);
+            result = folder.exists();
+            if (result) {
+                LOG.warn("Ошибка инициализации хранилища картинок пользователя!");
+                LOG.warn("Хранение перенаправлено в каталог");
+            } else {
+                LOG.error("Критическая ошибка инициализации хранилища картинок!");
+                LOG.info("Выключаюсь...");
+                System.exit(2);
+            }
         }
     }
 

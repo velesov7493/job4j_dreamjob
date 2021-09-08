@@ -22,7 +22,7 @@ public class PsqlPostStore implements PostStore {
         pool = AppSettings.getConnectionPool();
     }
 
-    public static PsqlPostStore getInstance() {
+    public static PostStore getInstance() {
         return INSTANCE;
     }
 
@@ -35,10 +35,13 @@ public class PsqlPostStore implements PostStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    result.add(new Post(
+                    Post entry = new Post(
                         it.getInt("id"),
                         it.getString("pName")
-                    ));
+                    );
+                    entry.setDescription(it.getString("pDescription"));
+                    entry.setCreated(it.getDate("pCreated"));
+                    result.add(entry);
                 }
             }
         } catch (Exception ex) {
@@ -61,6 +64,7 @@ public class PsqlPostStore implements PostStore {
                         it.getInt("id"),
                         it.getString("pName")
                     );
+                    result.setDescription(it.getString("pDescription"));
                     result.setCreated(it.getDate("pCreated"));
                 }
             }

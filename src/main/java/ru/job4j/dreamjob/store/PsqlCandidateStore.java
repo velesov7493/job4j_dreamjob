@@ -22,7 +22,7 @@ public class PsqlCandidateStore implements CandidateStore {
         pool = AppSettings.getConnectionPool();
     }
 
-    public static PsqlCandidateStore getInstance() {
+    public static CandidateStore getInstance() {
         return INSTANCE;
     }
 

@@ -44,12 +44,12 @@ public class PostServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
         PostStore store = PsqlPostStore.getInstance();
-        store.save(
-                new Post(
-                        Integer.parseInt(req.getParameter("id")),
-                        req.getParameter("nPosition")
-                )
+        Post p = new Post(
+                Integer.parseInt(req.getParameter("id")),
+                req.getParameter("nPosition")
         );
+        p.setDescription(req.getParameter("nDescription"));
+        store.save(p);
         resp.sendRedirect(req.getContextPath() + "/posts.do");
     }
 }

@@ -17,8 +17,10 @@
         <div class="card-body">
             <form action="<c:url value="/posts.do?id=${post.id}"/>" method="post">
                 <div class="form-group">
-                    <label>Наименование позиции</label>
+                    <label>Наименование вакансии:</label>
                     <input name="nPosition" type="text" class="form-control" value="<c:out value="${post.name}"/>">
+                    <label>Описание вакансии:</label>
+                    <textarea name="nDescription" class="form-control"><c:out value="${post.description}"/></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary pull-right" value="Сохранить" />
             </form>

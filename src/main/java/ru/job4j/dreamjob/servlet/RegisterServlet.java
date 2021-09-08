@@ -13,6 +13,13 @@ import java.io.IOException;
 
 public class RegisterServlet extends HttpServlet {
 
+    private void errorDispatch(String error, HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+
+        req.setAttribute("error", error);
+        req.getRequestDispatcher("views/user/register.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
@@ -30,9 +37,8 @@ public class RegisterServlet extends HttpServlet {
         String pass = req.getParameter("nPassword");
         String check = req.getParameter("nCheckPassword");
         if (pass == null || !pass.equals(check)) {
-            error = "Пароль повторён неверно.";
-            req.setAttribute("error", error);
-            req.getRequestDispatcher("views/user/register.jsp");
+            error = "Пароль отсутствует или повторён неверно.";
+            errorDispatch(error, req, resp);
             return;
         }
         User usr = new User();
@@ -43,8 +49,7 @@ public class RegisterServlet extends HttpServlet {
             error =
                     "Ошибка создания пользователя."
                     + " Скорее всего пользователь с таким email уже существует.";
-            req.setAttribute("error", error);
-            req.getRequestDispatcher("views/user/register.jsp");
+            errorDispatch(error, req, resp);
             return;
         }
         usr = store.login(usr.getEmail(), usr.getPassword());
@@ -52,8 +57,7 @@ public class RegisterServlet extends HttpServlet {
             error =
                     "Ошибка входа нового пользователя."
                     + " Пользователь не найден.";
-            req.setAttribute("error", error);
-            req.getRequestDispatcher("views/user/register.jsp");
+            errorDispatch(error, req, resp);
             return;
         }
         HttpSession sc = req.getSession();

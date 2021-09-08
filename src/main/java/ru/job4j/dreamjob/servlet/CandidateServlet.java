@@ -8,6 +8,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -65,7 +66,10 @@ public class CandidateServlet extends HttpServlet {
                 position
         );
         store.save(c);
-        imgStore.saveFromStream(c.getId(), req.getPart("nPhoto").getInputStream());
+        Part photo = req.getPart("nPhoto");
+        if (photo != null && photo.getSize() > 0) {
+            imgStore.saveFromStream(c.getId(), photo.getInputStream());
+        }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
