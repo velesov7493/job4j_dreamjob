@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/form-validate.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -14,25 +15,25 @@
         <form>
             <div class="form-group">
                 <label>Имя:</label>
-                <input type="text" class="form-control" name="nFirstName" placeholder="Имя" />
+                <input type="text" class="form-control" name="nFirstName" placeholder="Имя" title="Заполните имя!" id="fname" />
             </div>
             <div class="form-group">
                 <label>Фамилия:</label>
-                <input type="text" class="form-control" name="nLastName" placeholder="Фамилия" />
+                <input type="text" class="form-control" name="nLastName" placeholder="Фамилия" title="Заполните фамилию!" id="lname" />
             </div>
             <div class="form-group">
                 <label>Пол:</label>
-                <select class="form-control" name="nSex">
+                <select class="form-control" name="nSex" id="sex">
                     <option>Мужчина</option>
                     <option>Женщина</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Описание:</label>
-                <textarea class="form-control" name="nDescription"></textarea>
+                <textarea class="form-control" name="nDescription" title="Заполните описание!" id="description"></textarea>
             </div>
             <div class="form-group">
-                <button type="submit">Сохранить</button>
+                <button type="submit" onclick="validate()">Сохранить</button>
             </div>
         </form>
         <table class="table table-bordered">
