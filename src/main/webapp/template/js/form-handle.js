@@ -16,3 +16,11 @@ function validate() {
     }
     return true;
 }
+
+function addRow() {
+    var fName = $('#fname').val();
+    var lName = $('#lname').val();
+    var num = $('#list >tbody >tr').length;
+
+    $('#list tr:last').after('<tr><td scope="row">' + (num + 1) + '</td><td>' + fName + '</td><td>' + lName + '</td><td>@anonymous</td></tr>');
+}

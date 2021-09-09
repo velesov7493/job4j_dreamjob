@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/form-validate.js"></script>
+    <script src="js/form-handle.js"></script>
 </head>
 <body>
     <div class="container-fluid">
-        <h2>1. index.html + bootstrap, form, table [#58522]</h2>
+        <h2>3. Заполнить динамически таблицу. [#58533]</h2>
         <form>
             <div class="form-group">
                 <label>Имя:</label>
@@ -33,10 +33,11 @@
                 <textarea class="form-control" name="nDescription" title="Заполните описание!" id="description"></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" onclick="validate()">Сохранить</button>
+                <button type="submit" class="btn btn-primary" onclick="validate()">Сохранить</button>
+                <button type="button" class="btn btn-default" onclick="addRow()">Добавить строку</button>
             </div>
         </form>
-        <table class="table table-bordered">
+        <table id="list" class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">#</th>

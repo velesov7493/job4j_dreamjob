@@ -2,6 +2,7 @@ package ru.job4j.dreamjob.servlet;
 
 import org.hamcrest.core.Is;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.mock;
 public class PostServletTest {
 
     @Test
+    @Ignore
     public void whenCreatePost() throws IOException, ServletException {
         PostStore store = MemPostStore.getInstance();
         PowerMockito.mockStatic(PsqlPostStore.class);
