@@ -27,13 +27,29 @@ function addRow() {
 
 function sendGreeting() {
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: 'http://localhost:8080/dreamjob/greet',
-        data: 'name=' + $('#email').val(),
-        dataType: 'text'
-    }).done(function(data) {
-        $('#ajax-form').before('<h3>' + data + '</h3>');
-    }).fail(function(err) {
-        alert(err);
+        data: JSON.stringify({
+            name: $('#email').val()
+        }),
+        dataType: 'json'
+    }).done(function (data) {
+        $('#emailList li:last').append('<li>' + data.name + '</li>');
+    }).fail(function (err) {
+        console.log(JSON.stringify(err));
     });
 }
+
+$(document).ready(function() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/dreamjob/greet',
+        dataType: 'json'
+    }).done(function (data) {
+        for (var email of data) {
+            $('#emailList li:last').append('<li>' + email.name + '</li>')
+        }
+    }).fail(function (err) {
+        console.log(JSON.stringify(err));
+    });
+});
