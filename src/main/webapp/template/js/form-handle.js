@@ -24,3 +24,16 @@ function addRow() {
 
     $('#list tr:last').after('<tr><td scope="row">' + (num + 1) + '</td><td>' + fName + '</td><td>' + lName + '</td><td>@anonymous</td></tr>');
 }
+
+function sendGreeting() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/dreamjob/greet',
+        data: 'name=' + $('#email').val(),
+        dataType: 'text'
+    }).done(function(data) {
+        $('#ajax-form').before('<h3>' + data + '</h3>');
+    }).fail(function(err) {
+        alert(err);
+    });
+}

@@ -40,6 +40,10 @@
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>ru.job4j.dreamjob.servlet.RegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GreetingServlet</servlet-name>
+    <servlet-class>ru.job4j.dreamjob.servlet.GreetingServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index.do</url-pattern>
@@ -67,5 +71,9 @@
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GreetingServlet</servlet-name>
+    <url-pattern>/greet</url-pattern>
   </servlet-mapping>
 </web-app>
