@@ -1,3 +1,4 @@
+[![Build Status](https://app.travis-ci.com/velesov7493/job4j_dreamjob.svg?branch=master)](https://app.travis-ci.com/velesov7493/job4j_dreamjob)
 ## Главная страница ##
 ![Снимок страницы](images/index.png)
 ## Авторизация пользователя ##
