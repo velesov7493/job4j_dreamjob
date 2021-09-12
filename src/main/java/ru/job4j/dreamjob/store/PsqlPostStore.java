@@ -51,6 +51,32 @@ public class PsqlPostStore implements PostStore {
     }
 
     @Override
+    public Collection<Post> findAllCreatedToday() {
+        List<Post> result = new ArrayList<>();
+        String query =
+                "SELECT * FROM tz_posts "
+                + "WHERE pCreated BETWEEN (current_date - interval '1 day') AND current_date;";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(query)
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    Post entry = new Post(
+                            it.getInt("id"),
+                            it.getString("pName")
+                    );
+                    entry.setDescription(it.getString("pDescription"));
+                    entry.setCreated(it.getDate("pCreated"));
+                    result.add(entry);
+                }
+            }
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
+        }
+        return result;
+    }
+
+    @Override
     public Post getById(int id) {
         Post result = null;
         String query = "SELECT * FROM tz_posts WHERE id=?;";

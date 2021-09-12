@@ -15,7 +15,7 @@
                     <tr>
                         <th>№ п/п</th>
                         <th>Наименование</th>
-                        <th>Ред.</th>
+                        <th>Операции</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,10 @@
                     <tr>
                         <td><c:out value="${post.id}"/></td>
                         <td><c:out value="${post.name}"/></td>
-                        <td><a href="<c:url value="posts.do?id=${post.id}"/>"><i class="fa fa-edit mr-3"></i></a></td>
+                        <td>
+                            <a href="<c:url value="posts.do?id=${post.id}"/>"><i class="fa fa-edit mr-3"></i></a>&nbsp;
+                            <a href="<c:url value="posts.do?id=${post.id}&delete=1"/>"><i class="fa fa-times mr-3"></i></a>
+                        </td>
                     </tr>
                     </c:forEach>
                 </tbody>

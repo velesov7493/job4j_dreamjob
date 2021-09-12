@@ -1,17 +1,21 @@
 package ru.job4j.dreamjob.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Candidate {
 
     private int id;
+    private Integer cityId;
     private String name;
     private String position;
+    private Date created;
 
     public Candidate(int aId, String aName, String aPosition) {
         id = aId;
         name = aName;
         position = aPosition;
+        created = new Date();
     }
 
     public int getId() {
@@ -20,6 +24,14 @@ public class Candidate {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
     public String getName() {
@@ -36,6 +48,14 @@ public class Candidate {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override

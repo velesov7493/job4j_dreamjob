@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:set var="pageTitle" value="Редактирование вакансии" />
+<c:set var="pageScript" value="post.js" />
 <%@ include file="../../template/layouts/pageHeader.jsp" %>
 
 <div class="row">
@@ -18,11 +19,11 @@
             <form action="<c:url value="/posts.do?id=${post.id}"/>" method="post">
                 <div class="form-group">
                     <label>Наименование вакансии:</label>
-                    <input name="nPosition" type="text" class="form-control" value="<c:out value="${post.name}"/>">
+                    <input id="name" name="nPosition" type="text" class="form-control" value="<c:out value="${post.name}"/>" title="Заполните наименование вакансии!" required>
                     <label>Описание вакансии:</label>
-                    <textarea name="nDescription" class="form-control"><c:out value="${post.description}"/></textarea>
+                    <textarea id="description" name="nDescription" class="form-control" title="Заполните описание вакансии!" required><c:out value="${post.description}"/></textarea>
                 </div>
-                <input type="submit" class="btn btn-primary pull-right" value="Сохранить" />
+                <button type="submit" class="btn btn-primary pull-right" onclick="prepareSave()">Сохранить</button>
             </form>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:set var="pageTitle" value="Редактирование кандидата" />
+<c:set var="pageScript" value="candidate.js" />
 <%@ include file="../../template/layouts/pageHeader.jsp" %>
 
 <div class="row">
@@ -25,14 +26,21 @@
             <form action="<c:url value="/candidates.do"/>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Ф.И.О.</label>
-                    <input name="nName" type="text" class="form-control" value="<c:out value="${candidate.name}"/>"/>
+                    <input id="name" name="nName" type="text" class="form-control" value="<c:out value="${candidate.name}"/>" title="Заполните имя кандидата!" required/>
                     <label>Претендует на позицию</label>
-                    <input name="nPosition" type="text" class="form-control" value="<c:out value="${candidate.position}"/>"/>
+                    <input id="position" name="nPosition" type="text" class="form-control" value="<c:out value="${candidate.position}"/>" title="Заполните позицию, на которую претендует кандидат!" required/>
+                    <label>Город</label>
+                    <select id="cityList" class="form-control">
+                        <option id="null">Нет города</option>
+                    </select>
+                    <input type="hidden" name="nSelectedCityId" id="selectedCityId" value="<c:out value="${candidate.cityId}"/>"/>
+                </div>
+                <div class="form-group">
                     <label>Фото</label>
                     <input name="nPhoto" type="file"/>
                     <input name="nCandidateId" type="hidden" value="<c:out value="${candidate.id}"/>"/>
                 </div>
-                <input type="submit" class="btn btn-primary" style="float: right" value="Сохранить"/>
+                <button type="submit" class="btn btn-primary pull-right" onclick="prepareSave()">Сохранить</button>
             </form>
         </div>
     </div>

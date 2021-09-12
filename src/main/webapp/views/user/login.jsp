@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="Вход в систему" />
 <%@ include file="../../template/layouts/pageHeaderSimple.jsp" %>
 
-<div class="row">
+<div class="row vert-center">
     <div class="card">
         <div class="card-header"><h2>Авторизация</h2></div>
         <div class="card-body">

@@ -15,6 +15,18 @@ import java.nio.charset.StandardCharsets;
 @MultipartConfig(maxFileSize = 16777216L, maxRequestSize = 33554432L)
 public class CandidateServlet extends HttpServlet {
 
+    private void deleteCandidate(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+
+        CandidateStore store = PsqlCandidateStore.getInstance();
+        String sid = req.getParameter("id");
+        int id = Integer.parseInt(sid);
+        if (id != 0) {
+            store.delete(id);
+        }
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
+    }
+
     private void editCandidate(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
@@ -34,6 +46,11 @@ public class CandidateServlet extends HttpServlet {
         throws ServletException, IOException {
 
         if (req.getParameter("id") != null) {
+            String del = req.getParameter("delete");
+            if (del != null) {
+                deleteCandidate(req, resp);
+                return;
+            }
             editCandidate(req, resp);
             return;
         }
@@ -52,6 +69,10 @@ public class CandidateServlet extends HttpServlet {
                 req.getPart("nCandidateId").getInputStream().readAllBytes(),
                 StandardCharsets.UTF_8
         );
+        String cityId = new String(
+                req.getPart("nSelectedCityId").getInputStream().readAllBytes(),
+                StandardCharsets.UTF_8
+        );
         String name = new String(
                 req.getPart("nName").getInputStream().readAllBytes(),
                 StandardCharsets.UTF_8
@@ -65,6 +86,9 @@ public class CandidateServlet extends HttpServlet {
                 name,
                 position
         );
+        if (!cityId.equals("null")) {
+            c.setCityId(Integer.parseInt(cityId));
+        }
         store.save(c);
         Part photo = req.getPart("nPhoto");
         if (photo != null && photo.getSize() > 0) {

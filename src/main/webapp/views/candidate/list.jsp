@@ -16,7 +16,7 @@
                     <th>№ п/п</th>
                     <th>Ф.И.О.</th>
                     <th>Претендует на позицию</th>
-                    <th>Ред.</th>
+                    <th>Операции</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,7 +25,10 @@
                     <td><c:out value="${candidate.id}"/></td>
                     <td><c:out value="${candidate.name}"/></td>
                     <td><c:out value="${candidate.position}"/></td>
-                    <td><a href="<c:url value="/candidates.do?id=${candidate.id}"/>"><i class="fa fa-edit mr-3"></i></a></td>
+                    <td>
+                        <a href="<c:url value="/candidates.do?id=${candidate.id}"/>"><i class="fa fa-edit mr-3"></i></a>&nbsp;
+                        <a href="<c:url value="/candidates.do?id=${candidate.id}&delete=1"/>"><i class="fa fa-times mr-3"></i></a>
+                    </td>
                 </tr>
                 </c:forEach>
                 </tbody>

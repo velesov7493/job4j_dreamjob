@@ -8,6 +8,8 @@ public interface PostStore {
 
     Collection<Post> findAll();
 
+    Collection<Post> findAllCreatedToday();
+
     Post getById(int id);
 
     void save(Post value);

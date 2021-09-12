@@ -35,11 +35,41 @@ public class PsqlCandidateStore implements CandidateStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    result.add(new Candidate(
+                    Candidate c = new Candidate(
+                        it.getInt("id"),
+                        it.getString("cName"),
+                        it.getString("cPosition")
+                    );
+                    c.setCreated(it.getDate("cCreated"));
+                    c.setCityId(it.getInt("id_city"));
+                    result.add(c);
+                }
+            }
+        } catch (Exception ex) {
+            LOG.error("Ошибка при выполнении запроса: ", ex);
+        }
+        return result;
+    }
+
+    @Override
+    public Collection<Candidate> findAllCreatedToday() {
+        List<Candidate> result = new ArrayList<>();
+        String query =
+                "SELECT * FROM tz_candidates "
+                + "WHERE cCreated BETWEEN (current_date - interval '1 day') AND current_date;";
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(query)
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    Candidate c = new Candidate(
                             it.getInt("id"),
                             it.getString("cName"),
                             it.getString("cPosition")
-                    ));
+                    );
+                    c.setCreated(it.getDate("cCreated"));
+                    c.setCityId(it.getInt("id_city"));
+                    result.add(c);
                 }
             }
         } catch (Exception ex) {
@@ -63,6 +93,8 @@ public class PsqlCandidateStore implements CandidateStore {
                             it.getString("cName"),
                             it.getString("cPosition")
                     );
+                    result.setCityId(it.getInt("id_city"));
+                    result.setCreated(it.getDate("cCreated"));
                 }
             }
         } catch (Exception ex) {
@@ -72,13 +104,14 @@ public class PsqlCandidateStore implements CandidateStore {
     }
 
     private void create(Candidate value) {
-        String query = "INSERT INTO tz_candidates (cName, cPosition) VALUES (?, ?);";
+        String query = "INSERT INTO tz_candidates (id_city, cName, cPosition) VALUES (?, ?, ?);";
         try (
                 Connection cn = pool.getConnection();
                 PreparedStatement st = cn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
         ) {
-            st.setString(1, value.getName());
-            st.setString(2, value.getPosition());
+            st.setObject(1, value.getCityId(), Types.INTEGER);
+            st.setString(2, value.getName());
+            st.setString(3, value.getPosition());
             st.execute();
             ResultSet keys = st.getGeneratedKeys();
             if (keys.next()) {
@@ -93,14 +126,15 @@ public class PsqlCandidateStore implements CandidateStore {
     }
 
     private void update(Candidate value) {
-        String query = "UPDATE tz_candidates SET cName=?, cPosition=? WHERE id=?";
+        String query = "UPDATE tz_candidates SET id_city=?, cName=?, cPosition=? WHERE id=?";
         try (
                 Connection cn = pool.getConnection();
                 PreparedStatement st = cn.prepareStatement(query)
         ) {
-            st.setString(1, value.getName());
-            st.setString(2, value.getPosition());
-            st.setInt(3, value.getId());
+            st.setObject(1, value.getCityId(), Types.INTEGER);
+            st.setString(2, value.getName());
+            st.setString(3, value.getPosition());
+            st.setInt(4, value.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
             if (ex.getErrorCode() != 0) {

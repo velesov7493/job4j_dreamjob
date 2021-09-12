@@ -8,6 +8,8 @@ public interface CandidateStore {
 
     Collection<Candidate> findAll();
 
+    Collection<Candidate> findAllCreatedToday();
+
     Candidate getById(int id);
 
     void save(Candidate value);

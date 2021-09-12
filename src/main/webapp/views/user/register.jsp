@@ -3,20 +3,20 @@
 <c:set var="pageTitle" value="Регистрация" />
 <%@ include file="../../template/layouts/pageHeaderSimple.jsp" %>
 
-<div class="row">
+<div class="row vert-center">
     <div class="card">
         <div class="card-header"><h2>Регистрация</h2></div>
         <div class="card-body">
             <form action="<%=request.getContextPath()%>/register.do" method="post">
                 <div class="form-group">
                     <label>Ф.И.О:</label>
-                    <input type="text" class="form-control" name="nName">
+                    <input type="text" class="form-control" name="nName" required>
                     <label>Почта:</label>
-                    <input type="text" class="form-control" name="nEmail">
+                    <input type="text" class="form-control" name="nEmail" required>
                     <label>Пароль:</label>
-                    <input type="password" class="form-control" name="nPassword">
+                    <input type="password" class="form-control" name="nPassword" required>
                     <label>Проверка пароля (пароль еще раз):</label>
-                    <input type="password" class="form-control" name="nCheckPassword">
+                    <input type="password" class="form-control" name="nCheckPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right">Зарегистрироваться</button>
                 <c:if test="${not empty error}">
