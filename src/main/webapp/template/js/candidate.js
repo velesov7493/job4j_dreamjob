@@ -8,7 +8,9 @@ $(document).ready(function() {
         for (var city of data) {
             $('#cityList option:last').after('<option id="' + city.id + '">' + city.name + '</option>');
         }
-        $('#cityList >option#'+cityId).attr('selected', 1);
+        if (!(cityId === '' || isNaN(cityId))) {
+            $('#cityList >option#'+cityId).attr('selected', 1);
+        }
     }).fail(function (err) {
         console.log(JSON.stringify(err));
     });

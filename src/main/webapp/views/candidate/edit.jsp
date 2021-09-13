@@ -31,7 +31,7 @@
                     <input id="position" name="nPosition" type="text" class="form-control" value="<c:out value="${candidate.position}"/>" title="Заполните позицию, на которую претендует кандидат!" required/>
                     <label>Город</label>
                     <select id="cityList" class="form-control">
-                        <option id="null">Нет города</option>
+                        <option id="null" selected="1">Нет города</option>
                     </select>
                     <input type="hidden" name="nSelectedCityId" id="selectedCityId" value="<c:out value="${candidate.cityId}"/>"/>
                 </div>
