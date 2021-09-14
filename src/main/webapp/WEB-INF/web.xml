@@ -5,9 +5,17 @@
 <web-app>
   <display-name>dreamjob</display-name>
   <filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>ru.job4j.dreamjob.filter.CorsFilter</filter-class>
+  </filter>
+  <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>ru.job4j.dreamjob.filter.AuthFilter</filter-class>
   </filter>
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/cities</url-pattern>
+  </filter-mapping>
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
