@@ -26,7 +26,6 @@ import static org.mockito.Mockito.mock;
 public class PostServletTest {
 
     @Test
-    @Ignore
     public void whenCreatePost() throws IOException, ServletException {
         PostStore store = MemPostStore.getInstance();
         PowerMockito.mockStatic(PsqlPostStore.class);

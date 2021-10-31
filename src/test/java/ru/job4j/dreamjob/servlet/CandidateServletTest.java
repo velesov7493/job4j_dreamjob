@@ -31,7 +31,6 @@ import static org.mockito.Mockito.mock;
 public class CandidateServletTest {
 
     @Test
-    @Ignore
     public void whenCreateCandidate() throws ServletException, IOException {
         CandidateStore store = MemCandidateStore.getInstance();
         PowerMockito.mockStatic(PsqlCandidateStore.class);
@@ -39,12 +38,15 @@ public class CandidateServletTest {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         Part idPart = mock(Part.class);
+        Part cityIdPart = mock(Part.class);
         Part namePart = mock(Part.class);
         Part positionPart = mock(Part.class);
         Mockito.when(idPart.getInputStream()).thenReturn(new ByteArrayInputStream("0".getBytes(StandardCharsets.UTF_8)));
         Mockito.when(namePart.getInputStream()).thenReturn(new ByteArrayInputStream("Петров Валерий Николаевич".getBytes(StandardCharsets.UTF_8)));
         Mockito.when(positionPart.getInputStream()).thenReturn(new ByteArrayInputStream("Java middle job".getBytes(StandardCharsets.UTF_8)));
+        Mockito.when(cityIdPart.getInputStream()).thenReturn(new ByteArrayInputStream("null".getBytes(StandardCharsets.UTF_8)));
         Mockito.when(req.getPart("nCandidateId")).thenReturn(idPart);
+        Mockito.when(req.getPart("nSelectedCityId")).thenReturn(cityIdPart);
         Mockito.when(req.getPart("nName")).thenReturn(namePart);
         Mockito.when(req.getPart("nPosition")).thenReturn(positionPart);
         Mockito.when(req.getPart("nPhoto")).thenReturn(null);

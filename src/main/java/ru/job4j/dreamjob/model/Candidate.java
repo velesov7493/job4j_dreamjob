@@ -16,6 +16,7 @@ public class Candidate {
         name = aName;
         position = aPosition;
         created = new Date();
+        cityId = null;
     }
 
     public int getId() {
