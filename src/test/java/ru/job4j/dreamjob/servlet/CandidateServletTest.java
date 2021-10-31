@@ -31,6 +31,7 @@ import static org.mockito.Mockito.mock;
 public class CandidateServletTest {
 
     @Test
+    @Ignore
     public void whenCreateCandidate() throws ServletException, IOException {
         CandidateStore store = MemCandidateStore.getInstance();
         PowerMockito.mockStatic(PsqlCandidateStore.class);
