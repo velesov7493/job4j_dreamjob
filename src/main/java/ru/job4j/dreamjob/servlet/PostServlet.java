@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PostServlet extends HttpServlet {
 
     private void deletePost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         PostStore store = PsqlPostStore.getInstance();
         String sid = req.getParameter("id");
@@ -25,7 +25,7 @@ public class PostServlet extends HttpServlet {
     }
 
     private void editPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         PostStore store = PsqlPostStore.getInstance();
         String sid = req.getParameter("id");
@@ -40,7 +40,7 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         if (req.getParameter("id") != null) {
             String del = req.getParameter("delete");
@@ -58,7 +58,7 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
         PostStore store = PsqlPostStore.getInstance();

@@ -21,7 +21,7 @@ public class CityServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         CityStore store = PsqlCityStore.getInstance();
         Collection<City> cities = store.findAll();

@@ -31,14 +31,14 @@ public class PsqlCandidateStore implements CandidateStore {
         List<Candidate> result = new ArrayList<>();
         String query = "SELECT * FROM tz_candidates;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     Candidate c = new Candidate(
-                        it.getInt("id"),
-                        it.getString("cName"),
-                        it.getString("cPosition")
+                            it.getInt("id"),
+                            it.getString("cName"),
+                            it.getString("cPosition")
                     );
                     c.setCreated(it.getDate("cCreated"));
                     c.setCityId(it.getInt("id_city"));
@@ -58,7 +58,7 @@ public class PsqlCandidateStore implements CandidateStore {
                 "SELECT * FROM tz_candidates "
                 + "WHERE cCreated BETWEEN (current_date - interval '1 day') AND current_date;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -83,7 +83,7 @@ public class PsqlCandidateStore implements CandidateStore {
         Candidate result = null;
         String query = "SELECT * FROM tz_candidates WHERE id=?;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/dreamjob/cities',
@@ -9,7 +9,7 @@ $(document).ready(function() {
             $('#cityList option:last').after('<option id="' + city.id + '">' + city.name + '</option>');
         }
         if (!(cityId === '' || isNaN(cityId))) {
-            $('#cityList >option#'+cityId).attr('selected', 1);
+            $('#cityList >option#' + cityId).attr('selected', 1);
         }
     }).fail(function (err) {
         console.log(JSON.stringify(err));

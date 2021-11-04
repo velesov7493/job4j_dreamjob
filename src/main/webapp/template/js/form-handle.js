@@ -40,7 +40,7 @@ function sendGreeting() {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/dreamjob/greet',

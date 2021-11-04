@@ -73,10 +73,10 @@ public class Post {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         return
                 "Post{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", description='" + description + '\''
-                + ", created=" + df.format(created)
-                + '}';
+                        + "id=" + id
+                        + ", name='" + name + '\''
+                        + ", description='" + description + '\''
+                        + ", created=" + df.format(created)
+                        + '}';
     }
 }

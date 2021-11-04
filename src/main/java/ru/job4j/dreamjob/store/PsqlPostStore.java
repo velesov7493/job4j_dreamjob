@@ -31,13 +31,13 @@ public class PsqlPostStore implements PostStore {
         List<Post> result = new ArrayList<>();
         String query = "SELECT * FROM tz_posts;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     Post entry = new Post(
-                        it.getInt("id"),
-                        it.getString("pName")
+                            it.getInt("id"),
+                            it.getString("pName")
                     );
                     entry.setDescription(it.getString("pDescription"));
                     entry.setCreated(it.getDate("pCreated"));
@@ -57,7 +57,7 @@ public class PsqlPostStore implements PostStore {
                 "SELECT * FROM tz_posts "
                 + "WHERE pCreated BETWEEN (current_date - interval '1 day') AND current_date;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -81,14 +81,14 @@ public class PsqlPostStore implements PostStore {
         Post result = null;
         String query = "SELECT * FROM tz_posts WHERE id=?;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     result = new Post(
-                        it.getInt("id"),
-                        it.getString("pName")
+                            it.getInt("id"),
+                            it.getString("pName")
                     );
                     result.setDescription(it.getString("pDescription"));
                     result.setCreated(it.getDate("pCreated"));

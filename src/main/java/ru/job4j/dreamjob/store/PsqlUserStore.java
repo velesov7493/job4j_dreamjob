@@ -33,7 +33,7 @@ public class PsqlUserStore implements UserStore {
         String query = "SELECT * FROM tz_users;";
         try (
                 Connection cn = pool.getConnection();
-                PreparedStatement ps =  cn.prepareStatement(query)
+                PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -57,7 +57,7 @@ public class PsqlUserStore implements UserStore {
         String query = "SELECT * FROM tz_users WHERE id=?;";
         try (
                 Connection cn = pool.getConnection();
-                PreparedStatement ps =  cn.prepareStatement(query)
+                PreparedStatement ps = cn.prepareStatement(query)
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
@@ -81,7 +81,7 @@ public class PsqlUserStore implements UserStore {
         String query = "SELECT * FROM tz_users WHERE uMail=? AND uPassword=?;";
         try (
                 Connection cn = pool.getConnection();
-                PreparedStatement ps =  cn.prepareStatement(query)
+                PreparedStatement ps = cn.prepareStatement(query)
         ) {
             ps.setString(1, email);
             ps.setString(2, Security.getSHA1(password));

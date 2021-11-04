@@ -14,7 +14,7 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
 
     private void errorDispatch(String error, HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         req.setAttribute("error", error);
         req.getRequestDispatcher("views/user/register.jsp").forward(req, resp);
@@ -22,14 +22,14 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         req.getRequestDispatcher("views/user/register.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
         UserStore store = PsqlUserStore.getInstance();
@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
         if (!store.save(usr)) {
             error =
                     "Ошибка создания пользователя."
-                    + " Скорее всего пользователь с таким email уже существует.";
+                            + " Скорее всего пользователь с таким email уже существует.";
             errorDispatch(error, req, resp);
             return;
         }
@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
         if (usr == null) {
             error =
                     "Ошибка входа нового пользователя."
-                    + " Пользователь не найден.";
+                            + " Пользователь не найден.";
             errorDispatch(error, req, resp);
             return;
         }

@@ -1,14 +1,10 @@
 package ru.job4j.dreamjob.servlet;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hamcrest.core.Is;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.*;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import ru.job4j.dreamjob.AppSettings;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.MemPostStore;
 import ru.job4j.dreamjob.store.PostStore;
@@ -18,19 +14,35 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static org.mockito.Mockito.mock;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PsqlPostStore.class)
 public class PostServletTest {
 
+    private static BasicDataSource pool;
+
+    @BeforeClass
+    public static void setup() {
+        pool = AppSettings.getConnectionPool();
+    }
+
+    @After
+    public void cleanTable() throws SQLException {
+        String query = "DELETE FROM tz_posts";
+        try (
+                Connection conn = pool.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)
+        ) {
+            ps.executeUpdate();
+        }
+    }
+
     @Test
-    @Ignore
     public void whenCreatePost() throws IOException, ServletException {
-        PostStore store = MemPostStore.getInstance();
-        PowerMockito.mockStatic(PsqlPostStore.class);
-        PowerMockito.when(PsqlPostStore.getInstance()).thenReturn(store);
+        PostStore store = PsqlPostStore.getInstance();
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         Mockito.when(req.getParameter("id")).thenReturn("0");

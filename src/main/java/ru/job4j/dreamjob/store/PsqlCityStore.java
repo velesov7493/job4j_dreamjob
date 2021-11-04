@@ -66,7 +66,7 @@ public class PsqlCityStore implements CityStore {
         List<City> result = new ArrayList<>();
         String query = "SELECT * FROM tz_cities ORDER BY ctName;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -86,7 +86,7 @@ public class PsqlCityStore implements CityStore {
         City result = null;
         String query = "SELECT * FROM tz_cities WHERE id=?;";
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(query)
+             PreparedStatement ps = cn.prepareStatement(query)
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {

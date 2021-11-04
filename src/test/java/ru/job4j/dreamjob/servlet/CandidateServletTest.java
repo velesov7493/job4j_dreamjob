@@ -1,14 +1,13 @@
 package ru.job4j.dreamjob.servlet;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hamcrest.core.Is;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import ru.job4j.dreamjob.AppSettings;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.store.CandidateStore;
 import ru.job4j.dreamjob.store.MemCandidateStore;
@@ -22,20 +21,36 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PsqlCandidateStore.class)
 public class CandidateServletTest {
 
+    private static BasicDataSource pool;
+
+    @BeforeClass
+    public static void setup() {
+        pool = AppSettings.getConnectionPool();
+    }
+
+    @After
+    public void cleanTable() throws SQLException {
+        String query = "DELETE FROM tz_candidates";
+        try (
+                Connection conn = pool.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)
+        ) {
+            ps.executeUpdate();
+        }
+    }
+
     @Test
-    @Ignore
     public void whenCreateCandidate() throws ServletException, IOException {
-        CandidateStore store = MemCandidateStore.getInstance();
-        PowerMockito.mockStatic(PsqlCandidateStore.class);
-        PowerMockito.when(PsqlCandidateStore.getInstance()).thenReturn(store);
+        CandidateStore store = PsqlCandidateStore.getInstance();
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         Part idPart = mock(Part.class);

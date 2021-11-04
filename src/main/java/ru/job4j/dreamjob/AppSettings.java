@@ -23,8 +23,8 @@ public class AppSettings {
         String sql = "";
         try (InputStream inSQL =
                      AppSettings.class
-                     .getClassLoader()
-                     .getResourceAsStream(sqlResourceName)
+                             .getClassLoader()
+                             .getResourceAsStream(sqlResourceName)
         ) {
             if (inSQL != null) {
                 sql = new String(inSQL.readAllBytes(), StandardCharsets.UTF_8);
@@ -54,8 +54,8 @@ public class AppSettings {
             s = new Properties();
             try (InputStream in =
                          AppSettings.class
-                         .getClassLoader()
-                         .getResourceAsStream("app.properties")
+                                 .getClassLoader()
+                                 .getResourceAsStream("app.properties")
             ) {
                 if (in != null) {
                     s.load(in);
@@ -63,7 +63,7 @@ public class AppSettings {
                 }
             } catch (Throwable ex) {
                 LOG.error(
-                    "Критическая ошибка - невозможно прочитать свойства подключения к БД: ", ex
+                        "Критическая ошибка - невозможно прочитать свойства подключения к БД: ", ex
                 );
                 LOG.info("Выключаюсь...");
                 System.exit(2);

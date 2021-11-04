@@ -19,8 +19,8 @@ public class AuthFilter implements Filter {
         String uri = req.getRequestURI();
         if (
                 uri.endsWith("auth.do")
-                || uri.endsWith("index.do")
-                || uri.endsWith("register.do")
+                        || uri.endsWith("index.do")
+                        || uri.endsWith("register.do")
         ) {
             filterChain.doFilter(req, resp);
             return;

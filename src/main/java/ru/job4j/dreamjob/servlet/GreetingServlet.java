@@ -22,7 +22,7 @@ public class GreetingServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         Email email = GSON.fromJson(req.getReader(), Email.class);
         emails.add(email);
@@ -36,7 +36,7 @@ public class GreetingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();

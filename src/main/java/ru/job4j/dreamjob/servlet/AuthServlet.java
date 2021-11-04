@@ -15,14 +15,14 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         req.getRequestDispatcher("views/user/login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         UserStore store = PsqlUserStore.getInstance();
         User user = store.login(req.getParameter("email"), req.getParameter("password"));

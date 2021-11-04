@@ -69,7 +69,7 @@ public class Candidate {
         }
         Candidate candidate = (Candidate) o;
         return id == candidate.id
-               && Objects.equals(name, candidate.name);
+                && Objects.equals(name, candidate.name);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class Candidate {
     public String toString() {
         return
                 "Candidate{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", position='" + position + '\''
-                + '}';
+                        + "id=" + id
+                        + ", name='" + name + '\''
+                        + ", position='" + position + '\''
+                        + '}';
     }
 }

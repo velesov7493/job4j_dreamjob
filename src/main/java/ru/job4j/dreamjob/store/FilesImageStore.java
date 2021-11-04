@@ -70,7 +70,7 @@ public class FilesImageStore implements ImageStore {
         } catch (Throwable ex) {
             if (id == 0) {
                 throw new IllegalStateException(
-                    "Изображение отсутствующей фотографии (img000000000.res) не найдено!"
+                        "Изображение отсутствующей фотографии (img000000000.res) не найдено!"
                 );
             }
             result = load(0);

@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 public class CandidateServlet extends HttpServlet {
 
     private void deleteCandidate(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         CandidateStore store = PsqlCandidateStore.getInstance();
         String sid = req.getParameter("id");
@@ -28,7 +28,7 @@ public class CandidateServlet extends HttpServlet {
     }
 
     private void editCandidate(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         CandidateStore store = PsqlCandidateStore.getInstance();
         String sid = req.getParameter("id");
@@ -43,7 +43,7 @@ public class CandidateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         if (req.getParameter("id") != null) {
             String del = req.getParameter("delete");
@@ -61,7 +61,7 @@ public class CandidateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         CandidateStore store = PsqlCandidateStore.getInstance();
         ImageStore imgStore = FilesImageStore.getInstance();

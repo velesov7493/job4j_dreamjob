@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0;URL=http://localhost:8080/dreamjob/index.do" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="refresh" content="0;URL=http://localhost:8080/dreamjob/index.do"/>
     <title>Перенаправление</title>
 </head>
 </html>

@@ -10,63 +10,65 @@
     <script src="js/form-handle.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        <h2>3. Заполнить динамически таблицу. [#58533]</h2>
-        <form>
-            <div class="form-group">
-                <label>Имя:</label>
-                <input type="text" class="form-control" name="nFirstName" placeholder="Имя" title="Заполните имя!" id="fname" />
-            </div>
-            <div class="form-group">
-                <label>Фамилия:</label>
-                <input type="text" class="form-control" name="nLastName" placeholder="Фамилия" title="Заполните фамилию!" id="lname" />
-            </div>
-            <div class="form-group">
-                <label>Пол:</label>
-                <select class="form-control" name="nSex" id="sex">
-                    <option>Мужчина</option>
-                    <option>Женщина</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Описание:</label>
-                <textarea class="form-control" name="nDescription" title="Заполните описание!" id="description"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" onclick="validate()">Сохранить</button>
-                <button type="button" class="btn btn-default" onclick="addRow()">Добавить строку</button>
-            </div>
-        </form>
-        <table id="list" class="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Профиль</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Марк</td>
-                <td>Отто</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Джейкоб</td>
-                <td>Торнтон</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Ларри</td>
-                <td>Птица</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container-fluid">
+    <h2>3. Заполнить динамически таблицу. [#58533]</h2>
+    <form>
+        <div class="form-group">
+            <label>Имя:</label>
+            <input type="text" class="form-control" name="nFirstName" placeholder="Имя" title="Заполните имя!"
+                   id="fname"/>
+        </div>
+        <div class="form-group">
+            <label>Фамилия:</label>
+            <input type="text" class="form-control" name="nLastName" placeholder="Фамилия" title="Заполните фамилию!"
+                   id="lname"/>
+        </div>
+        <div class="form-group">
+            <label>Пол:</label>
+            <select class="form-control" name="nSex" id="sex">
+                <option>Мужчина</option>
+                <option>Женщина</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Описание:</label>
+            <textarea class="form-control" name="nDescription" title="Заполните описание!" id="description"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" onclick="validate()">Сохранить</button>
+            <button type="button" class="btn btn-default" onclick="addRow()">Добавить строку</button>
+        </div>
+    </form>
+    <table id="list" class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Профиль</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Марк</td>
+            <td>Отто</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Джейкоб</td>
+            <td>Торнтон</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Ларри</td>
+            <td>Птица</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

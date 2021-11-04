@@ -1,10 +1,10 @@
 a:hover {
     outline: none;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 a:focus {
-    outline:none;
+    outline: none;
     outline-offset: 0;
 }
 
@@ -16,7 +16,7 @@ a {
 }
 
 .btn:hover,
-.btn:focus{
+.btn:focus {
     outline: none;
     box-shadow: none;
 }
@@ -90,7 +90,7 @@ ul.menu {
 .card-header {
     padding: .75rem 1.25rem;
     background-color: #F0F0E9;
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
 .card-body {
@@ -111,7 +111,7 @@ img.stretch {
     min-height: 200px;
     width: 75%;
     margin: 10px auto;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
 }
 

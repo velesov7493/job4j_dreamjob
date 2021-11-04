@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<c:set var="pageTitle" value="Работа мечты!" />
+<c:set var="pageTitle" value="Работа мечты!"/>
 <%@ include file="../template/layouts/pageHeader.jsp" %>
 
 <div class="row">
@@ -51,7 +51,8 @@
                         <td><c:out value="${candidate.id}"/></td>
                         <td><c:out value="${candidate.name}"/></td>
                         <td><c:out value="${candidate.position}"/></td>
-                        <td><a href="<c:url value="/candidates.do?id=${candidate.id}"/>"><i class="fa fa-edit mr-3"></i></a></td>
+                        <td><a href="<c:url value="/candidates.do?id=${candidate.id}"/>"><i class="fa fa-edit mr-3"></i></a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

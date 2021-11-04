@@ -45,7 +45,7 @@ public class MemPostStore implements PostStore {
             Post value = posts.get(key);
             if (
                     value.getCreated().after(clLeft.getTime())
-                    && value.getCreated().before(clRight.getTime())
+                            && value.getCreated().before(clRight.getTime())
             ) {
                 result.add(value);
             }
